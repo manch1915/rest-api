@@ -1,0 +1,19 @@
+{
+  "name": "levon/rest-api",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/",
+      "App\\Kernel\\": "kernel/"
+    }
+  },
+  "authors": [
+    {
+      "name": "levon",
+      "email": "levon.10h.y@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.2",
+    "ext-pdo": "*"
+  }
+}

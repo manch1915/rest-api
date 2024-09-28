@@ -1,0 +1,39 @@
+services:
+  web:
+    build: .
+    container_name: php_apache
+    volumes:
+      - ./:/var/www/html
+      - ./apache.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.2
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: restapi
+      MYSQL_USER: narcis
+      MYSQL_PASSWORD: narcis
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_USER: narcis
+      PMA_PASSWORD: narcis
+    ports:
+      - "8081:80"  # Access phpMyAdmin on port 8081
+    depends_on:
+      - db
+
+volumes:
+  db_data:
